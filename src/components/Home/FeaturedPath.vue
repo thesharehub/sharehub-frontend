@@ -1,39 +1,41 @@
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
-const paths = ref([
-  {
-    id: 1,
-    title: "Frontend Developer",
-    description:
-      "Frontend developers create the user interface and look and feel of websites and applications.",
-    icon: "../assets/front-end.png",
-  },
-  {
-    id: 2,
-    title: "Backend Developer",
-    description:
-      "Backend developers are responsible for server-side web application logic and integration of the work front-end developers do.",
-    icon: "../assets/backend.png",
-  },
-  {
-    id: 3,
-    title: "Cloud Computing",
-    description:
-      "Cloud computing is the on-demand availability of computer system resources, especially data storage and computing power, without direct active management by the user.",
-    icon: "../assets/cloud-service.png",
-  },
-]);
+const paths = ref(null);
+
+const fetchFeaturedPath = async () => {
+  const response = await fetch("http://localhost:5000/api/v1/learning-paths");
+  // only display the paths that has featured set to true
+  const result = await response.json();
+  paths.value = result.data.filter((path) => path.featured === true);
+};
+
+onMounted(() => {
+  fetchFeaturedPath();
+});
 </script>
 <template>
   <section class="featured-path">
     <h2 class="featured-path-header">Featured Path</h2>
     <div class="feature-grid">
       <div class="feature-card" v-for="path in paths" :key="path.id">
-        <img :src="path.icon" alt="" />
-        <h3>{{ path.title }}</h3>
+        <img
+          src="../assets/front-end.png"
+          alt=""
+          v-if="path.name === 'Frontend Development'"
+        />
+        <img
+          src="../assets/backend.png"
+          alt=""
+          v-if="path.name === 'Backend Development'"
+        />
+        <h3>{{ path.name }}</h3>
         <p>{{ path.description }}</p>
-        <button>Explore</button>
+        <router-link
+          :to="{ name: 'path', params: { pathSlug: path.slug } }"
+          class="view-btn"
+          >Get Started</router-link
+        >
       </div>
     </div>
   </section>
@@ -85,14 +87,16 @@ const paths = ref([
   margin-bottom: 1rem;
 }
 
-.feature-card button {
-  padding: 1rem 2rem;
-  border: none;
-  background-color: #000;
-  color: #fff;
+.view-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  background-color: transparent;
+  color: var(--color-text);
   font-size: 1rem;
   font-weight: 300;
-  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
 }
 
 @media (max-width: 1024px) {
@@ -103,6 +107,4 @@ const paths = ref([
     grid-template-columns: 1fr;
   }
 }
-
-
 </style>

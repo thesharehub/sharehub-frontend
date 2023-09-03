@@ -9,21 +9,21 @@
     <div class="step-container">
       <div class="step-container-item">
         <div class="step-container-img">
-          <img src="../assets/chpath.svg" alt="" />
+          <img src="@/assets/chpath.svg" alt="" />
         </div>
         <p>Choose your path</p>
       </div>
 
       <div class="step-container-item">
         <div class="step-container-img">
-          <img src="../assets/seRes.svg" alt="" />
+          <img src="@/assets/seRes.svg" alt="" />
         </div>
         <p>See the resources</p>
       </div>
 
       <div class="step-container-item">
         <div class="step-container-img">
-          <img src="../assets/fopath.svg" alt="" />
+          <img src="@/assets/fopath.svg" alt="" />
         </div>
         <p>Follow the path</p>
       </div>

@@ -1,9 +1,7 @@
 <script setup>
-import Landing from '../components/Landing.vue';
-import FeaturedPath from '../components/FeaturedPath.vue';
-import QouteHow from '../components/QouteHow.vue';
-
-
+import Landing from "../components/Home/Landing.vue";
+import FeaturedPath from "../components/Home/FeaturedPath.vue";
+import QouteHow from "../components/Home/QouteHow.vue";
 </script>
 
 <template>
@@ -13,3 +11,4 @@ import QouteHow from '../components/QouteHow.vue';
     <QouteHow />
   </main>
 </template>
+  
